@@ -92,10 +92,9 @@ def _attach_browserstack_session(cfg: BrowserStackConfig) -> None:
         data = response.json().get('automation_session', {})
         if url := data.get('browser_url'):
             allure.attach(
-                f'<html><head><meta http-equiv="refresh" content="0;url={url}"></head>'
-                f'<body><a href="{url}">Open BrowserStack Session</a></body></html>',
+                url,
                 name='BrowserStack Session',
-                attachment_type=allure.attachment_type.HTML,
+                attachment_type=allure.attachment_type.TEXT,
             )
         if video_url := data.get('video_url'):
             allure.attach(
