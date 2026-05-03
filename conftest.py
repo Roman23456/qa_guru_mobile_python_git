@@ -49,10 +49,11 @@ def mobile_management():
     browser.config.driver = driver
     browser.config.timeout = 10.0
 
-    try:
-        browser.driver.start_recording_screen()
-    except Exception:
-        pass
+    if context == 'local':
+        try:
+            browser.driver.start_recording_screen()
+        except Exception:
+            pass
 
     yield
 
@@ -62,16 +63,17 @@ def mobile_management():
         attachment_type=allure.attachment_type.PNG,
     )
 
-    try:
-        video_b64 = browser.driver.stop_recording_screen()
-        if video_b64:
-            allure.attach(
-                base64.b64decode(video_b64),
-                name='Video',
-                attachment_type=allure.attachment_type.MP4,
-            )
-    except Exception:
-        pass
+    if context == 'local':
+        try:
+            video_b64 = browser.driver.stop_recording_screen()
+            if video_b64:
+                allure.attach(
+                    base64.b64decode(video_b64),
+                    name='Video',
+                    attachment_type=allure.attachment_type.MP4,
+                )
+        except Exception:
+            pass
 
     if context == 'browserstack':
         _attach_browserstack_session(config)
@@ -92,6 +94,12 @@ def _attach_browserstack_session(cfg: BrowserStackConfig) -> None:
             allure.attach(
                 f'<html><body><a href="{url}">Open BrowserStack Session</a></body></html>',
                 name='BrowserStack Session',
+                attachment_type=allure.attachment_type.HTML,
+            )
+        if video_url := data.get('video_url'):
+            allure.attach(
+                f'<html><body><video width="100%" controls><source src="{video_url}" type="video/mp4"></video></body></html>',
+                name='Video',
                 attachment_type=allure.attachment_type.HTML,
             )
     except Exception:
