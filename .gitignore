@@ -222,6 +222,10 @@ __marimo__/
 allure-results/
 allure-report/
 
+# Jenkins runtime artifacts
+notifications/
+*.jar
+
 # App binaries
 app/*.apk
 app/*.ipa
