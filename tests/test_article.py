@@ -1,6 +1,6 @@
 import allure
 from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, have
+from selene import be, browser, have
 
 
 @allure.feature('Articles')
@@ -20,10 +20,9 @@ def test_open_article_from_search():
                                      '//android.view.View[@clickable="true"]')).first.click()
 
     with allure.step('Закрыть попап "Wikipedia games", если он появился'):
-        try:
-            browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/closeButton')).with_(timeout=3).click()
-        except Exception:
-            pass
+        close_button = browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/closeButton'))
+        if close_button.with_(timeout=3).wait.until(be.visible):
+            close_button.click()
 
     with (allure.step('Убедиться, что заголовок статьи содержит "Appium"')):
         browser.element((AppiumBy.XPATH, '//*[@resource-id="org.wikipedia.alpha:id'
