@@ -66,6 +66,12 @@ def mobile_management():
         attachment_type=allure.attachment_type.PNG,
     )
 
+    allure.attach(
+        browser.driver.page_source,
+        name="Page Source",
+        attachment_type=allure.attachment_type.XML,
+    )
+
     if context == "local":
         try:
             video_b64 = browser.driver.stop_recording_screen()
