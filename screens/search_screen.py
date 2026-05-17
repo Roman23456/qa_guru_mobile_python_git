@@ -6,9 +6,7 @@ from selene import browser, have
 class SearchScreen:
     @allure.step("Открыть строку поиска")
     def open(self):
-        browser.element(
-            (AppiumBy.XPATH, '//*[@text="Search Wikipedia"]')
-        ).click()
+        browser.element((AppiumBy.ACCESSIBILITY_ID, "Search Wikipedia")).click()
         return self
 
     @allure.step("Ввести поисковый запрос '{query}'")
