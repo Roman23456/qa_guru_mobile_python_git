@@ -18,6 +18,17 @@
   <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white" alt="Jenkins"/>
 </p>
 
+| Технология | Назначение |
+|---|---|
+| **Python 3.10+** | Язык написания тестов |
+| **pytest** | Фреймворк для запуска тестов и управления фикстурами |
+| **Appium** | Драйвер для автоматизации Android-приложений |
+| **Selene** | Высокоуровневая обёртка над Selenium/Appium с fluent API |
+| **Allure** | Генерация читаемых HTML-отчётов с вложениями |
+| **BrowserStack** | Облачная платформа для запуска тестов на реальных устройствах |
+| **pydantic-settings** | Управление конфигурацией через `.env`-файлы |
+| **Jenkins** | CI/CD: автоматический запуск тестов по расписанию и по коммиту |
+
 ---
 
 ## Покрытие тестами
@@ -39,6 +50,10 @@
 qa_guru_mobile_python_git/
 ├── app/
 │   └── wikipedia.apk          # APK-файл тестируемого приложения
+├── screens/
+│   ├── onboarding_screen.py   # Screen Object: экран онбординга
+│   ├── search_screen.py       # Screen Object: экран поиска
+│   └── article_screen.py      # Screen Object: экран статьи
 ├── tests/
 │   ├── test_onboarding.py     # Тесты онбординга
 │   ├── test_search.py         # Тесты поиска
@@ -106,13 +121,17 @@ pip install -r requirements.txt
 
 ---
 
-## :jenkins: Запуск в Jenkins
+## Jenkins
 
 [![Jenkins](https://img.shields.io/badge/Jenkins-Job-D24939?style=for-the-badge&logo=jenkins&logoColor=white)](https://jenkins.autotests.cloud/job/test_example_mobile_/)
+
+Запуск тестов в Jenkins: [jenkins.autotests.cloud/job/test_example_mobile_/](https://jenkins.autotests.cloud/job/test_example_mobile_/)
 
 ---
 
 ## Allure Report
+
+[![Allure Report](https://img.shields.io/badge/Allure-Report-E5A52D?style=for-the-badge&logo=qameta&logoColor=white)](https://jenkins.autotests.cloud/job/test_example_mobile_/allure/)
 
 После выполнения тестов генерируется Allure-отчёт:
 
